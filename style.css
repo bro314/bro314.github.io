@@ -1,0 +1,31 @@
+.imgstyle {
+  position: absolute;
+  visibility: visible;
+  top: -150px;
+}
+body, p, td {
+  color: #99cc33;
+  font: 16px sans-serif;
+}
+.title {
+  font: 24px sans-serif;
+  text-align: center;
+  background-color: #009900;
+}
+a:link {
+  color: #ffcc99;
+}
+a:visited {
+  color: #ffcc99;
+}
+a:active {
+  color: #ffffff;
+}
+table {
+  border: 0px;
+  width: 500px;
+  border-spacing: 0px;
+}
+td {
+  padding: 20px;
+}
