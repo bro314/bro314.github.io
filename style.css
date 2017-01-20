@@ -1,14 +1,24 @@
-.imgstyle {
-  position: absolute;
-  visibility: visible;
-  top: -150px;
+body {
+  max-width: 800px;
+  margin: 50px auto;
+  background-size: 100% auto;
 }
 body, p, td {
   color: #99cc33;
   font: 16px sans-serif;
 }
+.big {
+  font-size: 24px;
+}
+a.big {
+  text-decoration: none;
+}
+a.big:hover {
+  cursor: pointer;
+}
 .title {
-  font: 24px sans-serif;
+  font-family: 'Tangerine';
+  font-size: 72px;
   text-align: center;
   background-color: #009900;
 }
@@ -23,9 +33,29 @@ a:active {
 }
 table {
   border: 0px;
-  width: 500px;
   border-spacing: 0px;
 }
 td {
   padding: 20px;
+}
+.green1 {
+  background-color: #007700;
+}
+.green2 {
+  background-color: #448800;
+}
+.green3 {
+  background-color: #44AA00;
+}
+.green4 {
+  background-color: #337711;
+}
+.green5 {
+  background-color: #009700;
+}
+.green6 {
+  background-color: #00AA11;
+}
+.center {
+  text-align: center;
 }
