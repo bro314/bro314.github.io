@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet">
+  <meta content="de" http-equiv="Content-Language">
   <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
   <style media="all" type="text/css">
+  body {
+    background-image: url("images/Cyclamen-hederifolium.JPG");
+  }
+  td {
+    padding: 4px;
+  }
   </style>
   <title>Die Preisliste</title>
 </head>
-<body bgcolor="#008800">
-  <p align="right"><a href="index.html">zurück zur Startseite</a></p>
-  <h1>Hier ist meine aktuelle Preisliste.</h1>
+<body>
+  <div class="backlink">
+    <p><a href="index.html">zurück zur Startseite</a></p>
+  </div>
+  <div class="text">
+  <h3>Hier ist meine aktuelle Preisliste.</h3>
   <p>Letzte Aktualisierung am 15.3.2016.</p>
   <p>Als engagierter Hobbygärtner habe ich bei der Vermehrung für den eigenen Bedarf immer wieder
   Pflanzen übrig, die ich auf diesem Wege anderen Interessenten zugänglich machen möchte, zumal es
@@ -56,11 +67,11 @@
         <textarea cols="60" name="Sonderwunsch" rows="5" wrap="physical"></textarea></td>
       </tr>
     </table><br>
-    <br>
-    <table></table><br>
-    <br>
     <input type="submit" value="Absenden"> <input type="reset" value="Abbrechen">
   </form>
-  <p><a href="index.html">zurück zur Startseite</a></p>
+  </div>
+  <div class="backlink">
+    <p><a href="index.html">zurück zur Startseite</a></p>
+  </div>
 </body>
 </html>
