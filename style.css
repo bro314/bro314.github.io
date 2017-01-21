@@ -2,10 +2,14 @@ body {
   max-width: 800px;
   margin: 50px auto;
   background-size: 100% auto;
+  box-shadow: 0px 0px 8px rgba(155, 155, 155, 1);
 }
 body, p, td {
   color: #ffcc99;
   font: 16px sans-serif;
+}
+h3 {
+  font: 24px sans-serif;
 }
 .big {
   font-size: 24px;
@@ -25,8 +29,11 @@ body, p, td {
   padding: 16px;
 }
 .backlink {
-  background-color: rgba(50, 100, 50, 1);
+  background-color: rgba(0, 0, 0, 0.3);
   padding: 16px;
+}
+.backlink p {
+  margin: 0;
 }
 a:link {
   color: #ffcc99;
