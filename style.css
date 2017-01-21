@@ -4,23 +4,17 @@ body {
   background-size: 100% auto;
 }
 body, p, td {
-  color: #99cc33;
+  color: #ffcc99;
   font: 16px sans-serif;
 }
 .big {
   font-size: 24px;
 }
-a.big {
-  text-decoration: none;
-}
-a.big:hover {
-  cursor: pointer;
-}
 .title {
   font-family: 'Tangerine';
   font-size: 72px;
   text-align: center;
-  background-color: #009900;
+  background-color: rgba(50, 100, 50, 0.8);
 }
 a:link {
   color: #ffcc99;
@@ -31,7 +25,17 @@ a:visited {
 a:active {
   color: #ffffff;
 }
+a.big {
+  padding: 30px;
+  display: block;
+  text-decoration: none;
+}
+a.big:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
 table {
+  width: 100%;
   border: 0px;
   border-spacing: 0px;
 }
@@ -39,7 +43,7 @@ td {
   padding: 20px;
 }
 .green1 {
-  background-color: #007700;
+  background-color: rgba(50, 100, 50, 1);
 }
 .green2 {
   background-color: #448800;
@@ -51,7 +55,7 @@ td {
   background-color: #337711;
 }
 .green5 {
-  background-color: #009700;
+  background-color: rgba(50, 100, 50, 1);
 }
 .green6 {
   background-color: #00AA11;
