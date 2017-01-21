@@ -2,7 +2,7 @@ body {
   max-width: 800px;
   margin: 50px auto;
   background-size: 100% auto;
-  box-shadow: 0px 0px 8px rgba(155, 155, 155, 1);
+  box-shadow: 0px 0px 4px rgba(155, 155, 155, 1);
 }
 body, p, td {
   color: #ffcc99;
