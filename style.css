@@ -11,10 +11,22 @@ body, p, td {
   font-size: 24px;
 }
 .title {
-  font-family: 'Tangerine';
-  font-size: 72px;
   text-align: center;
   background-color: rgba(50, 100, 50, 0.8);
+  padding: 16px;
+}
+.title p {
+  font-family: 'Tangerine';
+  font-size: 72px;
+  margin: 0;
+}
+.text {
+  background-color: rgba(50, 100, 50, 1);
+  padding: 16px;
+}
+.backlink {
+  background-color: rgba(50, 100, 50, 1);
+  padding: 16px;
 }
 a:link {
   color: #ffcc99;
@@ -40,7 +52,7 @@ table {
   border-spacing: 0px;
 }
 td {
-  padding: 20px;
+  padding: 16px;
 }
 .green1 {
   background-color: rgba(50, 100, 50, 1);
