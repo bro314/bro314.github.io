@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+    body { background-color: #333; display: flex; flex-direction: column; align-items: center; font-family: sans-serif; color: white; }
+    h2 { margin-top: 20px; }
+    .card {
+        position: relative;
+        width: 500px; height: 500px;
+        background-color: black;
+        display: flex; justify-content: center; align-items: center;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        margin-top: 20px;
+    }
+    /* Die Ringe */
+    .ring { position: absolute; border-radius: 50%; background: transparent; }
+    .ring-outer { width: 440px; height: 440px; border: 10px solid #00bfff; } /* Blau */
+    .ring-mid   { width: 370px; height: 370px; border: 10px solid #ffd700; } /* Gelb */
+    .ring-inner { width: 300px; height: 300px; border: 10px solid #dc143c; } /* Rot */
+    
+    /* Der QR Code */
+    .qr-code {
+        position: relative;
+        z-index: 10;
+        border: 10px solid black; /* Kleiner schwarzer Rand */
+    }
+</style>
+</head>
+<body>
+    <h2>Hier ist Judiths Hitster-Karte</h2>
+    <p>Mache einen Screenshot von dem schwarzen Quadrat unten:</p>
+    
+    <div class="card">
+        <div class="ring ring-outer"></div>
+        <div class="ring ring-mid"></div>
+        <div class="ring ring-inner"></div>
+        <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://www.boomplay.com/songs/212285411&color=ffffff&bgcolor=000000&margin=0" alt="QR Code">
+    </div>
+</body>
+</html>
