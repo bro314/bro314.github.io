@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HomeWorkout - Dein Trainingsplaner</title>
+    <meta
+      name="description"
+      content="Plane und tracke deine Home Workouts mit dem HomeWorkout Trainingsplaner."
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              navy: {
+                50: "#eff6ff",
+                100: "#dbeafe",
+                200: "#bfdbfe",
+                300: "#93c5fd",
+                400: "#60a5fa",
+                500: "#3b82f6",
+                600: "#2563eb",
+                700: "#1d4ed8",
+                800: "#1e40af",
+                900: "#1e3a8a",
+                950: "#0a192f",
+              },
+              "bg-main": "#f0f7ff",
+            },
+            fontFamily: {
+              display: ["Lexend", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <script type="module" crossorigin>(function(){const n=document.createElement("link").relList;if(n&&n.supports&&n.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))r(e);new MutationObserver(e=>{for(const a of e)if(a.type==="childList")for(const i of a.addedNodes)i.tagName==="LINK"&&i.rel==="modulepreload"&&r(i)}).observe(document,{childList:!0,subtree:!0});function s(e){const a={};return e.integrity&&(a.integrity=e.integrity),e.referrerPolicy&&(a.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?a.credentials="include":e.crossOrigin==="anonymous"?a.credentials="omit":a.credentials="same-origin",a}function r(e){if(e.ep)return;e.ep=!0;const a=s(e);fetch(e.href,a)}})();const _="hw_exercises",B="hw_workouts",F=[{id:"ex-1",name:"Liegestütze",nameEn:"Push-ups",category:"chest",muscles:"Brust, Trizeps",icon:"fitness_center",instructions:"Hände schulterbreit auf den Boden. Körper gerade halten. Langsam absenken, bis die Brust fast den Boden berührt, dann hochdrücken."},{id:"ex-2",name:"Kniebeugen",nameEn:"Bodyweight Squats",category:"legs",muscles:"Quadrizeps, Gesäß",icon:"foot_bones",instructions:"Füße schulterbreit. Hüfte nach hinten schieben und Knie beugen. Rücken gerade halten. Bis zur Oberschenkelparallele absenken."},{id:"ex-3",name:"Plank",nameEn:"Plank",category:"core",muscles:"Core, Bauch",icon:"timer",instructions:"Unterarme auf den Boden. Körper bildet eine gerade Linie. Bauch anspannen und Position halten."},{id:"ex-4",name:"Mountain Climbers",nameEn:"Mountain Climbers",category:"full-body",muscles:"Ganzkörper, Cardio",icon:"directions_run",instructions:"Liegestützposition. Abwechselnd Knie zur Brust ziehen, so schnell wie möglich."},{id:"ex-5",name:"Schulterdrücken",nameEn:"Shoulder Press",category:"shoulders",muscles:"Schultern",icon:"fitness_center",instructions:"Hände auf Schulterhöhe. Arme nach oben strecken, dann kontrolliert absenken."},{id:"ex-6",name:"Inverted Rows",nameEn:"Inverted Rows",category:"back",muscles:"Rücken, Bizeps",icon:"fitness_center",instructions:"Unter einer Stange liegen. Körper gerade halten und zur Stange hochziehen."},{id:"ex-7",name:"Hampelmänner",nameEn:"Jumping Jacks",category:"full-body",muscles:"Ganzkörper, Cardio",icon:"sports_gymnastics",instructions:"Beine auseinander springen und gleichzeitig Arme über den Kopf klatschen. Zurück in Ausgangsposition."},{id:"ex-8",name:"Ausfallschritte",nameEn:"Lunges",category:"legs",muscles:"Quadrizeps, Gesäß",icon:"directions_walk",instructions:"Großer Schritt nach vorne. Beide Knie um 90° beugen. Oberkörper aufrecht halten."},{id:"ex-9",name:"Burpees",nameEn:"Burpees",category:"full-body",muscles:"Ganzkörper, Cardio",icon:"exercise",instructions:"In die Hocke gehen, Liegestütz, wieder aufspringen. Arme über den Kopf strecken."},{id:"ex-10",name:"Trizeps Dips",nameEn:"Tricep Dips",category:"arms",muscles:"Trizeps, Schultern",icon:"fitness_center",instructions:"Hände auf Stuhlkante. Körper absenken und wieder hochdrücken. Ellenbogen nah am Körper."}];function N(){return"id-"+Date.now()+"-"+Math.random().toString(36).substr(2,9)}function j(t,n){try{const s=localStorage.getItem(t);return s?JSON.parse(s):n}catch{return n}}function $(t,n){localStorage.setItem(t,JSON.stringify(n))}function L(){return j(_,[])}function C(t){return L().find(n=>n.id===t)}function U(t){const n=L();if(t.id){const s=n.findIndex(r=>r.id===t.id);s>=0?n[s]={...n[s],...t}:n.push(t)}else t.id=N(),n.push(t);return $(_,n),t}function h(){return j(B,[])}function P(t){return h().find(n=>n.id===t)}function J(t){const n=h();if(t.id){const s=n.findIndex(r=>r.id===t.id);s>=0?n[s]={...n[s],...t}:n.push(t)}else t.id=N(),n.push(t);return $(B,n),t}function V(t){const n=h().filter(s=>s.id!==t);$(B,n)}function X(){if(L().length===0&&$(_,F),h().length===0){const t=[{id:"wk-1",title:"Ganzkörper Fokus",category:"full-body",exercises:[{exerciseId:"ex-1",sets:3,reps:15,rest:60},{exerciseId:"ex-2",sets:4,reps:20,rest:45},{exerciseId:"ex-3",sets:3,reps:1,rest:30},{exerciseId:"ex-4",sets:3,reps:20,rest:45},{exerciseId:"ex-7",sets:3,reps:30,rest:30},{exerciseId:"ex-8",sets:3,reps:12,rest:45},{exerciseId:"ex-9",sets:3,reps:10,rest:60},{exerciseId:"ex-10",sets:3,reps:12,rest:45}],createdAt:Date.now()},{id:"wk-2",title:"Yoga Flow",category:"full-body",exercises:[{exerciseId:"ex-3",sets:3,reps:1,rest:30},{exerciseId:"ex-8",sets:2,reps:10,rest:45},{exerciseId:"ex-2",sets:3,reps:15,rest:45},{exerciseId:"ex-5",sets:2,reps:12,rest:30}],createdAt:Date.now()},{id:"wk-3",title:"HIIT Cardio",category:"full-body",exercises:[{exerciseId:"ex-4",sets:4,reps:20,rest:30},{exerciseId:"ex-7",sets:4,reps:30,rest:20},{exerciseId:"ex-9",sets:4,reps:10,rest:45},{exerciseId:"ex-1",sets:3,reps:15,rest:30},{exerciseId:"ex-2",sets:3,reps:20,rest:30},{exerciseId:"ex-8",sets:3,reps:12,rest:30},{exerciseId:"ex-3",sets:2,reps:1,rest:30},{exerciseId:"ex-10",sets:3,reps:12,rest:30},{exerciseId:"ex-5",sets:3,reps:10,rest:30},{exerciseId:"ex-6",sets:3,reps:10,rest:30}],createdAt:Date.now()},{id:"wk-4",title:"Oberkörper Kraft",category:"chest",exercises:[{exerciseId:"ex-1",sets:4,reps:15,rest:60},{exerciseId:"ex-5",sets:4,reps:10,rest:60},{exerciseId:"ex-6",sets:4,reps:12,rest:60},{exerciseId:"ex-10",sets:3,reps:15,rest:45},{exerciseId:"ex-3",sets:3,reps:1,rest:30}],createdAt:Date.now()}];$(B,t)}}const E=[{value:"all",label:"Alle"},{value:"chest",label:"Brust"},{value:"back",label:"Rücken"},{value:"legs",label:"Beine"},{value:"shoulders",label:"Schultern"},{value:"arms",label:"Arme"},{value:"core",label:"Core"},{value:"full-body",label:"Ganzkörper"}];function Y(t){const n=E.find(s=>s.value===t);return n?n.label:t}let I={},k=null;function Z(t){I=t}function f(t){window.location.hash=t}function Q(){return window.location.hash||"#/"}function ee(t){if(I[t])return{handler:I[t],params:{}};for(const n of Object.keys(I)){const s=n.split("/"),r=t.split("/");if(s.length!==r.length)continue;const e={};let a=!0;for(let i=0;i<s.length;i++)if(s[i].startsWith(":"))e[s[i].slice(1)]=r[i];else if(s[i]!==r[i]){a=!1;break}if(a)return{handler:I[n],params:e}}return null}function te(t){function n(){const s=Q();k&&typeof k=="function"&&(k(),k=null);const r=ee(s);r?k=r.handler(t,r.params):f("#/")}window.addEventListener("hashchange",n),n()}function T({onAdd:t,onCreateNew:n,containerId:s="exercise-library"}){const r=L(),e=E.filter(a=>["all","chest","back","legs","core","shoulders"].includes(a.value));return`
+    <div id="${s}" class="flex flex-col h-full">
+      <div class="p-6 border-b border-slate-100">
+        <h3 class="text-lg font-bold text-navy-900 mb-4">Übungsbibliothek</h3>
+        <div class="relative mb-4">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+          <input
+            id="${s}-search"
+            class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-navy-900/20 focus:border-navy-900 outline-none placeholder:text-slate-400 transition-all"
+            placeholder="Übungen suchen..."
+            type="text"
+          />
+        </div>
+        <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar" id="${s}-filters">
+          ${e.map((a,i)=>`
+            <button
+              class="filter-btn flex-shrink-0 px-3 py-1.5 text-xs font-bold rounded-full transition-all duration-200
+                ${i===0?"bg-navy-900 text-white shadow-sm":"bg-slate-100 text-slate-600 hover:bg-slate-200"}"
+              data-category="${a.value}"
+            >${a.label}</button>
+          `).join("")}
+        </div>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-4 space-y-2 custom-scrollbar" id="${s}-list">
+        ${r.map(a=>se(a)).join("")}
+      </div>
+
+      <div class="p-4 border-t border-slate-100 bg-slate-50/50">
+        <button
+          id="${s}-create-btn"
+          class="w-full py-2.5 bg-white border border-slate-200 text-slate-700 text-sm font-bold rounded-xl shadow-sm hover:border-navy-900/30 hover:text-navy-900 transition-all flex items-center justify-center gap-2"
+        >
+          <span class="material-symbols-outlined text-sm">add</span>
+          Eigene Übung erstellen
+        </button>
+      </div>
+    </div>
+  `}function se(t,n){return`
+    <div
+      class="exercise-item p-3 rounded-xl border border-slate-100 hover:border-navy-200 hover:bg-navy-50/50 transition-all group flex items-center justify-between cursor-pointer"
+      data-exercise-id="${t.id}"
+      data-category="${t.categories?t.categories.join(","):t.category}"
+    >
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-500 group-hover:text-navy-900 group-hover:bg-navy-100 transition-colors flex-shrink-0">
+          <span class="material-symbols-outlined text-xl">${t.icon||"fitness_center"}</span>
+        </div>
+        <div class="min-w-0">
+          <p class="text-sm font-bold text-navy-900 truncate">${t.name}</p>
+          <p class="text-[10px] text-slate-500 uppercase font-bold tracking-tight">${t.muscles}</p>
+        </div>
+      </div>
+      <button class="add-exercise-btn p-1.5 text-navy-900 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" data-exercise-id="${t.id}">
+        <span class="material-symbols-outlined">add_circle</span>
+      </button>
+    </div>
+  `}function O({containerId:t="exercise-library",onAdd:n,onCreateNew:s,initialCategory:r="all",initialSearch:e=""}){const a=document.getElementById(t);if(!a)return{getState:()=>({category:"all",search:""})};let i=r,m=e;const x=document.getElementById(`${t}-search`);x&&(e&&(x.value=e),x.addEventListener("input",()=>{m=x.value,R(t,m,i)})),r!=="all"&&R(t,m,i);const c=document.getElementById(`${t}-filters`);c&&(r!=="all"&&c.querySelectorAll(".filter-btn").forEach(l=>{l.dataset.category===r?l.className=l.className.replace("bg-slate-100 text-slate-600 hover:bg-slate-200","bg-navy-900 text-white shadow-sm"):l.className=l.className.replace("bg-navy-900 text-white shadow-sm","bg-slate-100 text-slate-600 hover:bg-slate-200")}),c.addEventListener("click",l=>{const d=l.target.closest(".filter-btn");d&&(c.querySelectorAll(".filter-btn").forEach(y=>{y.className=y.className.replace("bg-navy-900 text-white shadow-sm","bg-slate-100 text-slate-600 hover:bg-slate-200")}),d.className=d.className.replace("bg-slate-100 text-slate-600 hover:bg-slate-200","bg-navy-900 text-white shadow-sm"),i=d.dataset.category,R(t,x?.value||"",i))})),a.addEventListener("click",l=>{const d=l.target.closest(".add-exercise-btn");d&&n&&n(d.dataset.exerciseId)});const o=document.getElementById(`${t}-create-btn`);return o&&s&&o.addEventListener("click",s),{getState:()=>({category:i,search:m})}}function R(t,n,s="all"){const r=document.getElementById(`${t}-list`);if(!r)return;const e=r.querySelectorAll(".exercise-item"),a=n.toLowerCase();e.forEach(i=>{const m=i.querySelector(".text-sm")?.textContent?.toLowerCase()||"",x=i.querySelector(".text-\\[10px\\]")?.textContent?.toLowerCase()||"",c=(i.dataset.category||"").split(","),o=!a||m.includes(a)||x.includes(a),l=s==="all"||c.includes(s);i.style.display=o&&l?"flex":"none"})}function D({content:t,size:n="md",onClose:s}){p();const r={sm:"max-w-sm",md:"max-w-md",lg:"max-w-lg",xl:"max-w-xl"}[n]||"max-w-md",e=document.createElement("div");e.id="modal-overlay",e.className="modal-overlay fixed inset-0 z-50 flex items-center justify-center bg-navy-950/50 backdrop-blur-sm p-4",e.innerHTML=`
+    <div class="modal-content bg-white rounded-3xl shadow-2xl w-full ${r} overflow-hidden">
+      ${t}
+    </div>
+  `,e.addEventListener("click",i=>{i.target===e&&(p(),s&&s())});const a=i=>{i.key==="Escape"&&(p(),s&&s(),document.removeEventListener("keydown",a))};document.addEventListener("keydown",a),document.body.appendChild(e)}function p(){const t=document.getElementById("modal-overlay");t&&t.remove()}const ne=E.filter(t=>t.value!=="all");function W(t){const n=new Set;D({content:`
+      <div class="p-8">
+        <div class="flex items-center gap-3 mb-8">
+          <button id="exercise-modal-back" class="text-navy-900 hover:text-navy-700 transition-colors">
+            <span class="material-symbols-outlined">arrow_back</span>
+          </button>
+          <h2 class="text-xl font-bold text-navy-900">Neue Übung erstellen</h2>
+        </div>
+
+        <form id="create-exercise-form" class="space-y-5">
+          <div class="space-y-2">
+            <label class="block text-sm font-semibold text-navy-900" for="ex-name">Übungsname</label>
+            <input
+              id="ex-name"
+              class="block w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-navy-900/20 focus:border-navy-900 outline-none text-slate-900 placeholder:text-slate-400 transition-all"
+              placeholder="z.B. Diamond Push-ups"
+              type="text"
+              required
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label class="block text-sm font-semibold text-navy-900">Muskelgruppen <span class="text-slate-400 font-normal">(mehrere auswählbar)</span></label>
+            <div id="ex-categories" class="flex flex-wrap gap-2">
+              ${ne.map(s=>`
+                <button
+                  type="button"
+                  class="cat-chip px-4 py-2 rounded-xl text-sm font-semibold border transition-all duration-200
+                    bg-slate-50 border-slate-200 text-slate-600 hover:border-navy-300 hover:bg-navy-50"
+                  data-value="${s.value}"
+                >${s.label}</button>
+              `).join("")}
+            </div>
+            <p id="ex-categories-error" class="text-xs text-red-500 hidden">Bitte mindestens eine Muskelgruppe wählen.</p>
+          </div>
+
+          <div class="space-y-2">
+            <label class="block text-sm font-semibold text-navy-900" for="ex-instructions">Anleitung</label>
+            <textarea
+              id="ex-instructions"
+              class="block w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-navy-900/20 focus:border-navy-900 outline-none text-slate-900 placeholder:text-slate-400 resize-none transition-all"
+              placeholder="Beschreibe die Ausführung..."
+              rows="4"
+            ></textarea>
+          </div>
+
+          <div class="pt-2 space-y-3">
+            <button
+              type="submit"
+              class="w-full bg-navy-900 hover:bg-navy-800 text-white font-bold py-3.5 px-6 rounded-xl transition-all shadow-md shadow-navy-900/20 flex items-center justify-center gap-2"
+            >
+              <span class="material-symbols-outlined text-lg">add_circle</span>
+              Übung speichern
+            </button>
+            <button
+              type="button"
+              id="exercise-modal-cancel"
+              class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3.5 px-6 rounded-xl transition-all"
+            >
+              Abbrechen
+            </button>
+          </div>
+        </form>
+
+        <div class="mt-6 p-4 rounded-xl bg-navy-50 border border-navy-100 flex items-start gap-3">
+          <span class="material-symbols-outlined text-navy-900 text-xl flex-shrink-0 mt-0.5">lightbulb</span>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Neue Übungen werden automatisch deiner durchsuchbaren Bibliothek hinzugefügt und können in jedes Workout eingefügt werden.
+          </p>
+        </div>
+      </div>
+    `,size:"md"}),document.getElementById("ex-categories")?.addEventListener("click",s=>{const r=s.target.closest(".cat-chip");if(!r)return;const e=r.dataset.value;n.has(e)?(n.delete(e),r.className=r.className.replace("bg-navy-900 border-navy-900 text-white shadow-sm","bg-slate-50 border-slate-200 text-slate-600 hover:border-navy-300 hover:bg-navy-50")):(n.add(e),r.className=r.className.replace("bg-slate-50 border-slate-200 text-slate-600 hover:border-navy-300 hover:bg-navy-50","bg-navy-900 border-navy-900 text-white shadow-sm"));const a=document.getElementById("ex-categories-error");a&&n.size>0&&a.classList.add("hidden")}),document.getElementById("exercise-modal-back")?.addEventListener("click",p),document.getElementById("exercise-modal-cancel")?.addEventListener("click",p),document.getElementById("create-exercise-form")?.addEventListener("submit",s=>{s.preventDefault();const r=document.getElementById("ex-name")?.value?.trim(),e=document.getElementById("ex-instructions")?.value?.trim()||"";if(n.size===0){document.getElementById("ex-categories-error")?.classList.remove("hidden");return}if(!r)return;const a=[...n],i=a.map(m=>E.find(x=>x.value===m)?.label||m);U({name:r,category:a[0],categories:a,muscles:i.join(", "),instructions:e,icon:"fitness_center"}),p(),t&&t()})}function M(t){const n=h();t.innerHTML=`
+    <main class="flex-1 flex overflow-hidden h-full">
+      \x3C!-- Main content -->
+      <section class="flex-[2] flex flex-col bg-transparent overflow-hidden">
+        <header class="p-8 pb-4 flex items-center justify-between gap-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-navy-900 rounded-xl flex items-center justify-center shadow-lg shadow-navy-900/20">
+              <span class="material-symbols-outlined text-white">bolt</span>
+            </div>
+            <h1 class="text-xl font-bold text-navy-900">HomeWorkout</h1>
+          </div>
+          <div class="flex items-center gap-4 flex-1 max-w-xl ml-8">
+            <div class="relative flex-1">
+              <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+              <input
+                id="dashboard-search"
+                class="w-full pl-12 pr-4 py-3 bg-white border-none rounded-2xl shadow-sm focus:ring-2 focus:ring-navy-900 text-sm outline-none"
+                placeholder="Workouts suchen..."
+                type="text"
+              />
+            </div>
+          </div>
+          <button
+            id="btn-new-workout"
+            class="flex items-center gap-2 bg-navy-900 text-white px-6 py-3 rounded-2xl font-semibold shadow-lg shadow-navy-900/20 hover:bg-navy-800 transition-all shrink-0"
+          >
+            <span class="material-symbols-outlined">add</span>
+            <span>Neues Workout</span>
+          </button>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-8 pt-4 custom-scrollbar page-enter">
+          <div id="workout-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            ${n.map(s=>re(s)).join("")}
+          </div>
+        </div>
+      </section>
+
+      \x3C!-- Right sidebar: Exercise Library -->
+      <aside class="flex-1 max-w-md border-l border-slate-200 bg-white flex flex-col">
+        ${T({containerId:"dash-library",onAdd:null,onCreateNew:null})}
+      </aside>
+    </main>
+  `,document.getElementById("btn-new-workout")?.addEventListener("click",()=>{f("#/workout/new")}),document.getElementById("workout-grid")?.addEventListener("click",s=>{const r=s.target.closest(".workout-card");if(!r)return;const e=r.dataset.workoutId,a=s.target.closest("[data-action]")?.dataset.action;if(a==="delete"){s.stopPropagation(),ae(e);return}if(a==="edit"){s.stopPropagation(),f(`#/workout/${e}/edit`);return}if(a==="start"){s.stopPropagation(),A(e);return}A(e)}),document.getElementById("dashboard-search")?.addEventListener("input",s=>{const r=s.target.value.toLowerCase();document.querySelectorAll(".workout-card").forEach(a=>{const i=a.querySelector(".workout-title")?.textContent?.toLowerCase()||"";a.style.display=i.includes(r)?"":"none"})}),O({containerId:"dash-library",onAdd:null,onCreateNew:()=>{W(()=>{M(t)})}})}function re(t){const n=t.exercises||[],s=n.length,r=[...new Set(n.map(l=>{const d=C(l.exerciseId);return d?Y(d.category):""}).filter(Boolean))],e=t.timerDuration||45,a=t.restEnabled?t.restDuration||15:0,i=s*e+Math.max(0,s-1)*a,m=Math.round(i/60),x={Brust:"fitness_center",Rücken:"fitness_center",Beine:"foot_bones",Core:"timer",Ganzkörper:"exercise",Schultern:"fitness_center",Arme:"fitness_center"},c=r[0]||"Ganzkörper",o=x[c]||"fitness_center";return`
+    <div class="workout-card bg-white p-6 rounded-3xl border border-navy-50 shadow-sm hover:shadow-lg hover:border-navy-200 transition-all cursor-pointer group" data-workout-id="${t.id}">
+      <div class="flex justify-between items-start mb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-navy-50 rounded-xl flex items-center justify-center text-navy-900 group-hover:bg-navy-100 transition-colors">
+            <span class="material-symbols-outlined">${o}</span>
+          </div>
+          <h3 class="workout-title text-lg font-bold text-navy-900">${t.title}</h3>
+        </div>
+        <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          <button class="p-1.5 text-slate-400 hover:text-navy-900 transition-colors rounded-lg hover:bg-navy-50" data-action="edit" title="Bearbeiten">
+            <span class="material-symbols-outlined text-lg">edit</span>
+          </button>
+          <button class="p-1.5 text-slate-400 hover:text-red-500 transition-colors rounded-lg hover:bg-red-50" data-action="delete" title="Löschen">
+            <span class="material-symbols-outlined text-lg">delete</span>
+          </button>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 mb-5">
+        <div class="flex items-center gap-1.5 text-slate-500">
+          <span class="material-symbols-outlined text-base">format_list_bulleted</span>
+          <span class="text-sm font-medium">${s} Übungen</span>
+        </div>
+        <div class="flex items-center gap-1.5 text-slate-500">
+          <span class="material-symbols-outlined text-base">schedule</span>
+          <span class="text-sm font-medium">~${m} Min.</span>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2 mb-4">
+        ${r.slice(0,4).map(l=>`
+          <span class="px-3 py-1 bg-navy-50 text-navy-900 text-[10px] font-bold rounded-lg uppercase tracking-wider">${l}</span>
+        `).join("")}
+      </div>
+      <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+        <button class="flex items-center gap-2 text-navy-900 font-bold text-sm hover:text-navy-700 transition-colors" data-action="start">
+          <span class="material-symbols-outlined text-lg">play_circle</span>
+          Starten
+        </button>
+      </div>
+      </div>
+    </div>
+  `}function A(t){const n=h().find(x=>x.id===t);if(!n)return;const r=(n.exercises||[]).length,e=n.timerDuration||45,a=n.restEnabled?n.restDuration||15:0,i=r*e+Math.max(0,r-1)*a,m=Math.round(i/60);D({content:`
+      <div class="p-8 text-center">
+        <div class="w-16 h-16 bg-navy-50 rounded-full flex items-center justify-center mx-auto mb-6">
+          <span class="material-symbols-outlined text-navy-900 text-3xl">play_circle</span>
+        </div>
+        <h2 class="text-2xl font-bold text-navy-900 mb-2">Workout starten?</h2>
+        <p class="text-slate-500 mb-8">
+          Bist du bereit für deine <strong class="text-navy-900">${n.title}</strong> Session? Wir tracken deinen Fortschritt.
+        </p>
+        <button
+          id="modal-start-yes"
+          class="w-full bg-navy-900 text-white font-bold py-3.5 px-6 rounded-2xl shadow-lg shadow-navy-900/20 hover:bg-navy-800 transition-all mb-3"
+        >Ja</button>
+        <button
+          id="modal-start-no"
+          class="w-full bg-white border border-slate-200 text-navy-900 font-semibold py-3.5 px-6 rounded-2xl hover:bg-slate-50 transition-all"
+        >Nein</button>
+        <div class="flex items-center justify-center gap-6 mt-6 text-sm text-slate-500">
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-base">schedule</span>
+            <span class="font-bold">${m} Min.</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-base">format_list_bulleted</span>
+            <span class="font-bold">${r} Übungen</span>
+          </div>
+        </div>
+      </div>
+    `,size:"sm"}),document.getElementById("modal-start-yes")?.addEventListener("click",()=>{p(),f(`#/workout/${t}/session`)}),document.getElementById("modal-start-no")?.addEventListener("click",()=>{p()})}function ae(t){const n=h().find(s=>s.id===t);n&&(D({content:`
+      <div class="p-8 text-center">
+        <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6">
+          <span class="material-symbols-outlined text-red-500 text-3xl">delete</span>
+        </div>
+        <h2 class="text-xl font-bold text-navy-900 mb-2">Workout löschen?</h2>
+        <p class="text-slate-500 mb-8">
+          Möchtest du <strong class="text-navy-900">"${n.title}"</strong> wirklich löschen? Das kann nicht rückgängig gemacht werden.
+        </p>
+        <div class="flex gap-3">
+          <button
+            id="modal-delete-cancel"
+            class="flex-1 bg-white border border-slate-200 text-slate-700 font-semibold py-3 px-6 rounded-xl hover:bg-slate-50 transition-all"
+          >Abbrechen</button>
+          <button
+            id="modal-delete-confirm"
+            class="flex-1 bg-red-500 text-white font-bold py-3 px-6 rounded-xl hover:bg-red-600 transition-all"
+          >Löschen</button>
+        </div>
+      </div>
+    `,size:"sm"}),document.getElementById("modal-delete-cancel")?.addEventListener("click",()=>{p()}),document.getElementById("modal-delete-confirm")?.addEventListener("click",()=>{V(t),p();const s=document.getElementById("app");M(s)}))}const le=E.filter(t=>t.value!=="all");function z(t,n={}){const s=n.id&&n.id!=="new",r=s?P(n.id):null,e={title:r?.title||"",category:r?.category||"full-body",timerDuration:r?.timerDuration||45,restEnabled:r?.restEnabled??!1,restDuration:r?.restDuration||15,exercises:r?.exercises?.map(c=>({...c}))||[],id:r?.id||null,_libCategory:"all",_libSearch:"",_libRef:null};function a(){const c=e.exercises.reduce((l,d)=>l+(d.sets||3),0),o=Math.round(c*1.5+e.exercises.reduce((l,d)=>l+(d.rest||45)*(d.sets||3),0)/60);t.innerHTML=`
+      <main class="flex-1 flex flex-col min-w-0 bg-bg-main border-r border-slate-200 h-full">
+        \x3C!-- Header -->
+        <header class="h-16 flex items-center justify-between px-8 bg-white border-b border-slate-200">
+          <div class="flex items-center gap-3">
+            <h1 class="text-xl font-bold text-navy-900">${s?"Workout bearbeiten":"Neues Workout"}</h1>
+            <span class="px-2.5 py-0.5 bg-slate-100 text-slate-500 text-[10px] font-bold uppercase rounded-md tracking-wider">Entwurf</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <button id="cw-cancel" class="px-5 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 rounded-xl transition-colors">Abbrechen</button>
+            <button id="cw-save" class="px-6 py-2.5 bg-navy-900 text-white text-sm font-bold rounded-xl shadow-md shadow-navy-900/20 hover:bg-navy-800 transition-all flex items-center gap-2">
+              <span>Speichern</span>
+              <span class="material-symbols-outlined text-sm">done</span>
+            </button>
+          </div>
+        </header>
+
+        \x3C!-- Form content -->
+        <div class="flex-1 overflow-y-auto p-8 custom-scrollbar page-enter">
+          <div class="max-w-3xl mx-auto space-y-8">
+            \x3C!-- Title & Category -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+              <div class="flex flex-col gap-2">
+                <label class="text-xs font-bold text-slate-500 uppercase tracking-wider">Workout Titel</label>
+                <input
+                  id="cw-title"
+                  class="w-full rounded-xl border-slate-200 bg-slate-50/50 h-12 px-4 focus:ring-2 focus:ring-navy-900/20 focus:border-navy-900 transition-all text-navy-900 font-medium outline-none"
+                  placeholder="z.B. Bein-Tag Destroyer"
+                  type="text"
+                  value="${e.title}"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <label class="text-xs font-bold text-slate-500 uppercase tracking-wider">Muskelkategorie</label>
+                <div class="relative">
+                  <select id="cw-category" class="w-full rounded-xl border-slate-200 bg-slate-50/50 h-12 px-4 focus:ring-2 focus:ring-navy-900/20 focus:border-navy-900 transition-all text-navy-900 font-medium outline-none">
+                    ${le.map(l=>`
+                      <option value="${l.value}" ${e.category===l.value?"selected":""}>${l.label}</option>
+                    `).join("")}
+                  </select>
+                </div>
+              </div>
+              <div class="flex flex-col gap-2">
+                <label class="text-xs font-bold text-slate-500 uppercase tracking-wider">Timer pro Übung</label>
+                <div class="relative">
+                  <input
+                    id="cw-timer"
+                    class="w-full rounded-xl border-slate-200 bg-slate-50/50 h-12 px-4 focus:ring-2 focus:ring-navy-900/20 focus:border-navy-900 transition-all text-navy-900 font-medium outline-none"
+                    type="number"
+                    min="10"
+                    max="600"
+                    value="${e.timerDuration}"
+                    placeholder="45"
+                  />
+                  <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-medium pointer-events-none">Sek.</span>
+                </div>
+              </div>
+            </div>
+
+            \x3C!-- Pause between exercises -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center gap-5">
+              <label class="flex items-center gap-3 cursor-pointer select-none">
+                <input
+                  id="cw-rest-enabled"
+                  type="checkbox"
+                  class="w-5 h-5 rounded-lg border-slate-300 text-navy-900 focus:ring-navy-900/20 cursor-pointer"
+                  ${e.restEnabled?"checked":""}
+                />
+                <span class="text-sm font-semibold text-navy-900">Pause zwischen Übungen</span>
+              </label>
+              <div id="cw-rest-duration-wrap" class="flex items-center gap-2 ${e.restEnabled?"":"opacity-40 pointer-events-none"}">
+                <input
+                  id="cw-rest-duration"
+                  class="w-20 rounded-xl border-slate-200 bg-slate-50/50 h-10 px-3 text-center focus:ring-2 focus:ring-navy-900/20 focus:border-navy-900 transition-all text-navy-900 font-bold outline-none"
+                  type="number"
+                  min="5"
+                  max="300"
+                  value="${e.restDuration}"
+                  ${e.restEnabled?"":"disabled"}
+                />
+                <span class="text-slate-500 text-sm font-medium">Sek.</span>
+              </div>
+            </div>
+
+            \x3C!-- Exercises List -->
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg font-bold text-navy-900">Ausgewählte Übungen</h3>
+                <span class="text-xs font-medium text-slate-500">${e.exercises.length} Übungen • ca. ${o} Min.</span>
+              </div>
+
+              <div id="cw-exercises-list" class="space-y-3">
+                ${e.exercises.map((l,d)=>i(l,d)).join("")}
+              </div>
+
+              \x3C!-- Add exercise placeholder -->
+              <div id="cw-add-placeholder" class="border-2 border-dashed border-slate-300 rounded-2xl p-8 flex flex-col items-center justify-center text-slate-400 hover:text-navy-900 hover:border-navy-900 hover:bg-navy-50/50 transition-all cursor-pointer">
+                <span class="material-symbols-outlined text-4xl mb-2">add_circle</span>
+                <span class="font-bold text-sm">Übung aus der Bibliothek hinzufügen</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      \x3C!-- Exercise Library Sidebar -->
+      <aside class="w-[380px] flex flex-col bg-white flex-shrink-0 border-l border-slate-200">
+        ${T({containerId:"cw-library",onAdd:null,onCreateNew:null})}
+      </aside>
+    `,m()}function i(c,o){const l=C(c.exerciseId);if(!l)return"";const d=E.find(y=>y.value===l.category)?.label||l.category;return`
+      <div class="group bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex items-center gap-4 hover:border-navy-200 transition-all" data-index="${o}">
+        <div class="cursor-grab text-slate-300 hover:text-slate-500 drag-handle">
+          <span class="material-symbols-outlined">drag_indicator</span>
+        </div>
+        <div class="w-12 h-12 bg-navy-50 rounded-xl flex items-center justify-center text-navy-900 flex-shrink-0">
+          <span class="material-symbols-outlined text-2xl">${l.icon||"fitness_center"}</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <h4 class="font-bold text-navy-900">${l.name}</h4>
+            <span class="px-2 py-0.5 bg-navy-50 text-navy-900 text-[10px] font-bold rounded uppercase">${d}</span>
+          </div>
+          <p class="text-xs text-slate-400 mt-1">${l.muscles||d}</p>
+        </div>
+        <div class="flex items-center gap-1">
+          <button class="ex-delete p-2 text-slate-400 hover:text-red-500 transition-colors" data-index="${o}">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+      </div>
+    `}function m(){document.getElementById("cw-cancel")?.addEventListener("click",()=>f("#/")),document.getElementById("cw-save")?.addEventListener("click",()=>{e.title=document.getElementById("cw-title")?.value?.trim()||"Unbenanntes Workout",e.category=document.getElementById("cw-category")?.value||"full-body",e.timerDuration=parseInt(document.getElementById("cw-timer")?.value)||45,e.restEnabled=document.getElementById("cw-rest-enabled")?.checked||!1,e.restDuration=parseInt(document.getElementById("cw-rest-duration")?.value)||15,J({id:e.id,title:e.title,category:e.category,timerDuration:e.timerDuration,restEnabled:e.restEnabled,restDuration:e.restDuration,exercises:e.exercises,createdAt:e.id?void 0:Date.now(),updatedAt:Date.now()}),f("#/")}),document.querySelectorAll(".ex-delete").forEach(c=>{c.addEventListener("click",()=>{const o=parseInt(c.dataset.index);if(!isNaN(o)){if(e._libRef){const l=e._libRef.getState();e._libCategory=l.category,e._libSearch=l.search}x(),e.exercises.splice(o,1),a()}})}),document.getElementById("cw-add-placeholder")?.addEventListener("click",()=>{document.getElementById("cw-library-search")?.focus()}),document.getElementById("cw-rest-enabled")?.addEventListener("change",c=>{const o=document.getElementById("cw-rest-duration-wrap"),l=document.getElementById("cw-rest-duration");c.target.checked?(o?.classList.remove("opacity-40","pointer-events-none"),l&&(l.disabled=!1)):(o?.classList.add("opacity-40","pointer-events-none"),l&&(l.disabled=!0))}),e._libRef=O({containerId:"cw-library",initialCategory:e._libCategory,initialSearch:e._libSearch,onAdd:c=>{if(e._libRef){const o=e._libRef.getState();e._libCategory=o.category,e._libSearch=o.search}x(),e.exercises.push({exerciseId:c}),a()},onCreateNew:()=>{if(e._libRef){const c=e._libRef.getState();e._libCategory=c.category,e._libSearch=c.search}W(()=>a())}})}function x(){e.title=document.getElementById("cw-title")?.value?.trim()||e.title,e.category=document.getElementById("cw-category")?.value||e.category,e.timerDuration=parseInt(document.getElementById("cw-timer")?.value)||e.timerDuration,e.restEnabled=document.getElementById("cw-rest-enabled")?.checked??e.restEnabled,e.restDuration=parseInt(document.getElementById("cw-rest-duration")?.value)||e.restDuration}a()}function ie(t,n={}){const s=P(n.id);if(!s||!s.exercises?.length){f("#/");return}const r=s.exercises.map(u=>({...u,data:C(u.exerciseId)})).filter(u=>u.data),e={currentIndex:0,isPaused:!1,isResting:!1,timerSeconds:0,timerMax:0,completedExercises:new Set,intervalId:null};function a(){return r[e.currentIndex]||null}function i(){return r[e.currentIndex+1]||null}function m(){return Math.round(e.completedExercises.size/r.length*100)}function x(u,b=!1){e.isResting=b,e.timerSeconds=u,e.timerMax=u,clearInterval(e.intervalId),e.intervalId=setInterval(()=>{if(!e.isPaused&&(e.timerSeconds--,c(),e.timerSeconds<=0))if(clearInterval(e.intervalId),e.isResting)e.isResting=!1,e.currentIndex++,o();else{e.completedExercises.add(e.currentIndex);const g=s.restEnabled?s.restDuration||15:0;e.currentIndex<r.length-1&&g>0?(x(g,!0),o()):(e.currentIndex<r.length-1,e.currentIndex++,o())}},1e3)}function c(){const u=document.getElementById("timer-text"),b=document.getElementById("timer-circle"),g=document.getElementById("timer-label");if(u){const v=Math.floor(e.timerSeconds/60).toString().padStart(2,"0"),w=(e.timerSeconds%60).toString().padStart(2,"0");u.textContent=`${v}:${w}`}if(b){const v=2*Math.PI*90,w=e.timerMax>0?e.timerSeconds/e.timerMax:0;b.style.strokeDashoffset=v*(1-w)}g&&(g.textContent=e.isResting?"PAUSE":"VERBLEIBEND")}function o(){const u=a(),b=i(),g=m();if(!u){l();return}const v=90,w=2*Math.PI*v,H=e.timerMax>0?e.timerSeconds/e.timerMax:0,K=w*(1-H),G=Math.floor(e.timerSeconds/60).toString().padStart(2,"0"),q=(e.timerSeconds%60).toString().padStart(2,"0");if(t.innerHTML=`
+      <main id="session-main" class="flex-1 flex flex-col relative overflow-hidden h-full bg-gradient-to-br from-bg-main to-white">
+        \x3C!-- Dark overlay for pause mode -->
+        <div id="session-overlay" class="absolute inset-0 bg-navy-800 transition-opacity duration-[1500ms] ease-in-out pointer-events-none" style="opacity: 0; z-index: 0;"></div>
+        <div class="relative z-10 flex-1 flex flex-col">
+        \x3C!-- Header -->
+        <header class="flex items-center justify-between px-10 py-5">
+          <div class="flex items-center gap-4">
+            <h2 class="text-xl font-bold tracking-tight ${e.isResting?"text-white":"text-navy-900"}">${s.title}</h2>
+            <span class="px-3 py-1 ${e.isResting?"bg-white/10 text-white/80":"bg-navy-900/5 text-navy-900"} rounded-full text-xs font-bold uppercase tracking-widest">
+              Übung ${e.currentIndex+1}/${r.length}
+            </span>
+          </div>
+          <div class="flex items-center gap-3">
+            <button id="session-pause" class="flex items-center gap-2 px-5 py-2.5 rounded-xl border ${e.isResting?"border-white/20 text-white hover:bg-white/10":"border-navy-200 text-navy-900 hover:bg-white"} transition-all text-sm font-semibold">
+              <span class="material-symbols-outlined text-lg">${e.isPaused?"play_arrow":"pause"}</span>
+              ${e.isPaused?"FORTSETZEN":"PAUSE"}
+            </button>
+            <button id="session-stop" class="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-red-200 hover:bg-red-50 transition-all text-sm font-semibold text-red-500">
+              <span class="material-symbols-outlined text-lg">stop</span>
+              BEENDEN
+            </button>
+          </div>
+        </header>
+
+        \x3C!-- Main exercise area -->
+        <div class="flex-1 flex items-center justify-center px-10 relative page-enter">
+
+          \x3C!-- Centered content -->
+          <div class="flex flex-col items-center justify-center -mt-12">
+            ${e.isResting?`
+              \x3C!-- REST / PAUSE MODE -->
+              <h1 class="text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase text-white/90 mb-6 animate-pulse">
+                PAUSE
+              </h1>
+              <p class="text-white/40 font-bold uppercase tracking-[0.3em] text-sm mb-8">
+                Nächste Übung
+              </p>
+              <p class="text-3xl md:text-4xl font-bold text-white/70 text-center mb-12">
+                ${b?b.data.name:u.data.name}
+              </p>
+            `:`
+              \x3C!-- EXERCISE MODE -->
+              <p class="text-navy-900/40 font-bold uppercase tracking-[0.3em] text-sm mb-4">
+                Aktuelle Übung
+              </p>
+              <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-none tracking-tighter uppercase text-navy-900 break-words hyphens-auto text-center mb-10">
+                ${u.data.name}
+              </h1>
+            `}
+
+            \x3C!-- Timer circle -->
+            <div class="relative flex items-center justify-center">
+              <svg class="w-56 h-56" viewBox="0 0 220 220">
+                <circle class="${e.isResting?"text-white/10":"text-navy-100"}" cx="110" cy="110" fill="transparent" r="${v}" stroke="currentColor" stroke-width="8"></circle>
+                <circle
+                  id="timer-circle"
+                  class="${e.isResting?"text-amber-400":"text-navy-900"} timer-ring"
+                  cx="110" cy="110" fill="transparent" r="${v}"
+                  stroke="currentColor"
+                  stroke-dasharray="${w}"
+                  stroke-dashoffset="${K}"
+                  stroke-linecap="round"
+                  stroke-width="8"
+                ></circle>
+              </svg>
+              <div class="absolute flex flex-col items-center">
+                <span id="timer-text" class="text-5xl font-black ${e.isResting?"text-white":"text-navy-900"}">${G}:${q}</span>
+                <span id="timer-label" class="text-[10px] font-bold ${e.isResting?"text-amber-400":"text-navy-900/50"} uppercase tracking-widest mt-1">
+                  ${e.isResting?"PAUSE":"VERBLEIBEND"}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          \x3C!-- Next exercise preview (only during exercise, not during pause) -->
+          ${!e.isResting&&b?`
+            <div class="absolute bottom-24 right-10">
+              <div class="bg-navy-900 text-white rounded-2xl p-5 w-64 shadow-2xl shadow-navy-900/20">
+                <div class="mb-3">
+                  <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">Nächste Übung</span>
+                </div>
+                <h3 class="text-xl font-bold mb-1">${b.data.name}</h3>
+                <p class="text-sm text-white/70">${b.data.muscles}</p>
+              </div>
+            </div>
+          `:""}
+
+          \x3C!-- Navigation buttons -->
+          <div class="absolute bottom-16 left-10 flex gap-3">
+            <button id="session-prev" class="h-14 w-14 rounded-full bg-white border border-navy-100 flex items-center justify-center hover:bg-navy-50 transition-all shadow-sm ${e.currentIndex===0?"opacity-40 cursor-not-allowed":""}">
+              <span class="material-symbols-outlined text-2xl text-navy-900">skip_previous</span>
+            </button>
+            <button id="session-done" class="h-14 px-6 rounded-full bg-navy-900 text-white flex items-center justify-center gap-2 hover:bg-navy-800 transition-all shadow-lg shadow-navy-900/20 font-bold text-sm">
+              <span class="material-symbols-outlined text-xl">check</span>
+              ${e.isResting?"Weiter":"Fertig"}
+            </button>
+            <button id="session-next" class="h-14 w-14 rounded-full bg-white border border-navy-100 flex items-center justify-center hover:bg-navy-50 transition-all shadow-sm ${e.currentIndex>=r.length-1?"opacity-40 cursor-not-allowed":""}">
+              <span class="material-symbols-outlined text-2xl text-navy-900">skip_next</span>
+            </button>
+          </div>
+        </div>
+
+        \x3C!-- Progress bar -->
+        <div class="w-full bg-white border-t border-navy-100 p-5 flex items-center gap-6">
+          <div class="flex flex-col min-w-max">
+            <span class="text-[10px] font-bold text-navy-900/40 uppercase tracking-widest">Gesamtfortschritt</span>
+            <span class="text-sm font-bold text-navy-900">${g}% Abgeschlossen</span>
+          </div>
+          <div class="flex-1 h-3.5 bg-navy-100 rounded-full overflow-hidden relative">
+            <div class="absolute top-0 left-0 h-full bg-navy-900 rounded-full transition-all duration-500 progress-shimmer" style="width: ${g}%;"></div>
+          </div>
+          <div class="text-right min-w-max">
+            <span class="text-xs font-bold text-navy-900">${e.completedExercises.size} / ${r.length} Übungen</span>
+          </div>
+        </div>
+        </div> \x3C!-- close z-10 wrapper -->
+      </main>
+    `,requestAnimationFrame(()=>{const S=document.getElementById("session-overlay");S&&(S.style.opacity=e.isResting?"1":"0")}),!e.isResting&&e.timerSeconds===0){const S=u.timer||s.timerDuration||45;x(S,!1)}y()}function l(){t.innerHTML=`
+      <main class="flex-1 flex flex-col items-center justify-center bg-gradient-to-br from-bg-main to-white page-enter h-full">
+        <div class="text-center max-w-md">
+          <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
+            <span class="material-symbols-outlined text-green-600 text-5xl">check_circle</span>
+          </div>
+          <h1 class="text-4xl font-black text-navy-900 mb-4">Geschafft! 🎉</h1>
+          <p class="text-lg text-slate-500 mb-2">
+            Du hast <strong class="text-navy-900">${s.title}</strong> abgeschlossen!
+          </p>
+          <p class="text-slate-400 mb-10">
+            ${r.length} Übungen • Großartige Arbeit!
+          </p>
+          <button
+            id="session-finish"
+            class="bg-navy-900 text-white font-bold py-4 px-10 rounded-2xl shadow-lg shadow-navy-900/20 hover:bg-navy-800 transition-all text-lg"
+          >
+            Zurück zum Dashboard
+          </button>
+        </div>
+      </main>
+    `,document.getElementById("session-finish")?.addEventListener("click",()=>f("#/"))}function d(){const u=document.getElementById("session-overlay");u?(u.style.opacity="0",setTimeout(()=>{o()},800)):o()}function y(){document.getElementById("session-pause")?.addEventListener("click",()=>{e.isPaused=!e.isPaused,o()}),document.getElementById("session-stop")?.addEventListener("click",()=>{clearInterval(e.intervalId),f("#/")}),document.getElementById("session-done")?.addEventListener("click",()=>{if(e.isResting)clearInterval(e.intervalId),e.isResting=!1,e.timerSeconds=0,e.timerMax=0,e.currentIndex++,d();else{clearInterval(e.intervalId),e.completedExercises.add(e.currentIndex);const u=s.restEnabled?s.restDuration||15:0;e.currentIndex<r.length-1&&u>0?(e.timerSeconds=0,e.timerMax=0,x(u,!0),o()):e.currentIndex<r.length-1?(e.timerSeconds=0,e.timerMax=0,e.currentIndex++,o()):(e.currentIndex++,o())}}),document.getElementById("session-prev")?.addEventListener("click",()=>{e.isResting?(clearInterval(e.intervalId),e.isResting=!1,e.timerSeconds=0,e.timerMax=0,e.completedExercises.delete(e.currentIndex),d()):e.currentIndex>0&&(clearInterval(e.intervalId),e.timerSeconds=0,e.timerMax=0,e.currentIndex--,e.completedExercises.delete(e.currentIndex),o())}),document.getElementById("session-next")?.addEventListener("click",()=>{e.isResting?(clearInterval(e.intervalId),e.isResting=!1,e.timerSeconds=0,e.timerMax=0,e.currentIndex++,d()):e.currentIndex<r.length-1&&(clearInterval(e.intervalId),e.timerSeconds=0,e.timerMax=0,e.completedExercises.add(e.currentIndex),e.currentIndex++,o())})}return o(),()=>{clearInterval(e.intervalId)}}X();Z({"#/":t=>M(t),"#/workout/new":t=>z(t,{}),"#/workout/:id/edit":(t,n)=>z(t,n),"#/workout/:id/session":(t,n)=>ie(t,n)});const oe=document.getElementById("app");te(oe);</script>
+    <style rel="stylesheet" crossorigin>body{font-family:Lexend,sans-serif;background-color:#f0f7ff}.material-symbols-outlined{font-variation-settings:"FILL" 0,"wght" 400,"GRAD" 0,"opsz" 24}.custom-scrollbar::-webkit-scrollbar{width:5px}.custom-scrollbar::-webkit-scrollbar-track{background:transparent}.custom-scrollbar::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:10px}.custom-scrollbar::-webkit-scrollbar-thumb:hover{background:#94a3b8}.timer-ring{transition:stroke-dashoffset .35s ease;transform:rotate(-90deg);transform-origin:50% 50%}.exercise-hero{font-size:clamp(3rem,10vw,9rem);line-height:1;letter-spacing:-.05em;text-transform:uppercase;font-weight:900;color:#1e3a8a}.page-enter{animation:fadeIn .25s ease-out}@keyframes fadeIn{0%{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.modal-overlay{animation:overlayIn .2s ease-out}@keyframes overlayIn{0%{opacity:0}to{opacity:1}}.modal-content{animation:modalIn .25s ease-out}@keyframes modalIn{0%{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}.drag-handle:hover{color:#1e3a8a}.progress-shimmer{position:relative;overflow:hidden}.progress-shimmer:after{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);animation:shimmer 2s infinite}@keyframes shimmer{to{left:100%}}.no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}.sidebar-active{position:relative}.sidebar-active:before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:24px;background:#1e3a8a;border-radius:0 4px 4px 0}select{appearance:none;background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%231e3a8a' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");background-position:right .75rem center;background-repeat:no-repeat;background-size:1.25em 1.25em}</style>
+  </head>
+  <body class="font-display bg-bg-main text-slate-800 h-screen overflow-hidden">
+    <div id="app" class="flex h-screen w-full overflow-hidden"></div>
+  </body>
+</html>
